@@ -33,7 +33,7 @@
 
     <div class="header__actions">
       <span class="header__badge">Замер бесплатно</span>
-    <a href="tel:+79991234567" class="header-phone">
+    <a href="tel:+7936" class="header-phone">
   +7 (999) 123-45-67
 </a>
     </div>
@@ -76,75 +76,161 @@
     </section>
 
    <section class="works reveal" id="works">
-    <div class="container">
+    
+  <div class="container">
 
-        <h2>Фото работ</h2>
+    <div class="works__header">
+      <div>
+        <p class="section-label">НАШИ ОБЪЕКТЫ</p>
+        <h2>Фото и видео выполненных работ</h2>
+      </div>
 
-        <div class="projects">
+      <p class="works__description">
+        Показываем реальные объекты, этапы ремонта и итоговый результат.
+        Все фотографии и видео сделаны нашей командой.
+      </p>
+    </div>
 
-            <div class="project-card" onclick="openProjectSlider(0)">
-                <div class="project-card__image">
-                    <img src="images/1.jpg" alt="Дом из газобетона">
-                    <div class="project-card__overlay">
-                        <span>Смотреть</span>
-                    </div>
-                </div>
-                <div class="project-card__title">Хлобытова 14</div>
-            </div>
 
-            <div class="project-card" onclick="openProjectSlider(1)">
-                <div class="project-card__image">
-                    <img src="images/2.jpg" alt="Ремонт квартиры">
-                    <div class="project-card__overlay">
-                        <span>Смотреть</span>
-                    </div>
-                </div>
-                <div class="project-card__title">Ремонт квартиры</div>
-            </div>
+    <div class="projects">
 
-            <div class="project-card" onclick="openProjectSlider(2)">
-                <div class="project-card__image">
-                    <img src="images/project-3-1.jpg" alt="Фасадные работы">
-                    <div class="project-card__overlay">
-                        <span>Смотреть</span>
-                    </div>
-                </div>
-                <div class="project-card__title">Фасадные работы</div>
-            </div>
+<article
+  class="project-card"
+  data-category="apartments"
+  onclick="openProject(0)"
+>
+  <div class="project-card__image">
+    <img
+      src="images/projects/fedora-poletaeva/cover.jpg"
+      alt="Ремонт квартиры на улице Фёдора Полетаева"
+    >
 
-            <div class="project-card" onclick="openProjectSlider(3)">
-                <div class="project-card__image">
-                    <img src="images/project-4-1.jpg" alt="Коммерческий объект">
-                    <div class="project-card__overlay">
-                        <span>Смотреть</span>
-                    </div>
-                </div>
-                <div class="project-card__title">Коммерческий объект</div>
-            </div>
+    <div class="project-card__gradient"></div>
 
-            <div class="project-card" onclick="openProjectSlider(4)">
-                <div class="project-card__image">
-                    <img src="images/project-5-1.jpg" alt="Кровельные работы">
-                    <div class="project-card__overlay">
-                        <span>Смотреть</span>
-                    </div>
-                </div>
-                <div class="project-card__title">Кровельные работы</div>
-            </div>
+    <div class="project-card__badges">
+      <span>
+        <i class="fa-solid fa-camera"></i>
+        16 фото
+      </span>
 
-            <div class="project-card" onclick="openProjectSlider(5)">
-                <div class="project-card__image">
-                    <img src="images/project-6-1.jpg" alt="Отделка дома">
-                    <div class="project-card__overlay">
-                        <span>Смотреть</span>
-                    </div>
-                </div>
-                <div class="project-card__title">Отделка дома</div>
-            </div>
+      <span>
+        <i class="fa-solid fa-play"></i>
+        2 видео
+      </span>
+    </div>
 
+    <div class="project-card__overlay">
+      <span>Смотреть объект</span>
+    </div>
+  </div>
+
+  <div class="project-card__content">
+    <div>
+      <p class="project-card__category">
+        Квартира
+      </p>
+
+      <h3>Квартира на Фёдора Полетаева</h3>
+    </div>
+
+    <div class="project-card__meta">
+      <span>
+        <i class="fa-solid fa-location-dot"></i>
+        Москва
+      </span>
+
+      <span>
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+        Черновой этап
+      </span>
+    </div>
+  </div>
+</article>
+
+      <article
+        class="project-card"
+        data-category="houses"
+        onclick="openProject(1)"
+      >
+        <div class="project-card__image">
+          <img
+            src="images/projects/house-180/cover.jpg"
+            alt="Отделка дома 180 м²"
+          >
+
+          <div class="project-card__gradient"></div>
+
+          <div class="project-card__badges">
+            <span>
+              <i class="fa-solid fa-camera"></i>
+              5 фото
+            </span>
+
+            <span>
+              <i class="fa-solid fa-play"></i>
+              1 видео
+            </span>
+          </div>
+
+          <div class="project-card__overlay">
+            <span>Смотреть объект</span>
+          </div>
         </div>
 
+        <div class="project-card__content">
+          <div>
+            <p class="project-card__category">
+              Загородный дом
+            </p>
+
+            <h3>Отделка дома 180 м²</h3>
+          </div>
+        </div>
+      </article>
+
+      <article
+        class="project-card"
+        data-category="commercial"
+        onclick="openProject(2)"
+      >
+        <div class="project-card__image">
+          <img
+            src="images/projects/commercial/cover.jpg"
+            alt="Ремонт коммерческого помещения"
+          >
+
+          <div class="project-card__gradient"></div>
+
+          <div class="project-card__badges">
+            <span>
+              <i class="fa-solid fa-camera"></i>
+              4 фото
+            </span>
+
+            <span>
+              <i class="fa-solid fa-play"></i>
+              2 видео
+            </span>
+          </div>
+
+          <div class="project-card__overlay">
+            <span>Смотреть объект</span>
+          </div>
+        </div>
+
+        <div class="project-card__content">
+          <div>
+            <p class="project-card__category">
+              Коммерческое помещение
+            </p>
+
+            <h3>Ремонт офиса 120 м²</h3>
+          </div>
+        </div>
+      </article>
+
     </div>
+  </div>
 </section>
     <section class="before-after reveal">
   <div class="container">
@@ -258,31 +344,9 @@
   </div>
 </section>
 
-    <div class="modal" id="galleryModal">
-        <button class="modal__close" onclick="closeGallery()">×</button>
 
-        <button class="modal__arrow modal__arrow--left" onclick="prevImage()">‹</button>
 
-        <img class="modal__image" id="modalImage" src="" alt="Фото проекта">
 
-        <button class="modal__arrow modal__arrow--right" onclick="nextImage()">›</button>
-    </div>
-
-<div class="project-slider" id="projectSlider">
-  <button class="project-slider__close" onclick="closeProjectSlider()">×</button>
-
-  <button class="project-slider__arrow project-slider__arrow--left" onclick="prevSliderImage()">‹</button>
-
-  <div class="project-slider__content">
-    <img id="projectSliderImage" src="" alt="Фото проекта">
-    <div class="project-slider__info">
-      <h3 id="projectSliderTitle"></h3>
-      <p id="projectSliderCounter"></p>
-    </div>
-  </div>
-
-  <button class="project-slider__arrow project-slider__arrow--right" onclick="nextSliderImage()">›</button>
-</div>
 
 
 
@@ -365,180 +429,560 @@
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 </div>
+<div class="project-modal" id="projectModal">
+  <button
+    class="project-modal__close"
+    type="button"
+    aria-label="Закрыть"
+    onclick="closeProject()"
+  >
+    ×
+  </button>
+
+  <div class="project-modal__layout">
+
+    <div class="project-modal__gallery">
+
+      <div class="project-modal__viewer" id="projectViewer"></div>
+
+      <button
+        class="project-modal__arrow project-modal__arrow--left"
+        type="button"
+        aria-label="Предыдущий файл"
+        onclick="previousProjectMedia()"
+      >
+        ‹
+      </button>
+
+      <button
+        class="project-modal__arrow project-modal__arrow--right"
+        type="button"
+        aria-label="Следующий файл"
+        onclick="nextProjectMedia()"
+      >
+        ›
+      </button>
+
+      <div
+        class="project-modal__thumbnails"
+        id="projectThumbnails"
+      ></div>
+    </div>
+
+    <aside class="project-modal__info">
+
+      <p
+        class="project-modal__category"
+        id="projectCategory"
+      ></p>
+
+      <h2 id="projectTitle"></h2>
+
+      <div class="project-modal__properties">
+        <div>
+          <span>Местоположение</span>
+          <strong id="projectLocation"></strong>
+        </div>
+
+        <div>
+          <span>Площадь</span>
+          <strong id="projectArea"></strong>
+        </div>
+
+        <div>
+          <span>Срок выполнения</span>
+          <strong id="projectDuration"></strong>
+        </div>
+
+        <div>
+          <span>Тип работ</span>
+          <strong id="projectWorkType"></strong>
+        </div>
+      </div>
+
+      <p
+        class="project-modal__description"
+        id="projectDescription"
+      ></p>
+
+      <div class="project-modal__counter" id="projectCounter"></div>
+
+      <div class="project-modal__cta">
+        <p>Хотите похожий результат?</p>
+
+        <a href="#contacts" class="btn btn--primary" onclick="closeProject()">
+          Получить смету
+        </a>
+
+        <a href="tel:+79991234567" class="project-modal__phone">
+          <i class="fa-solid fa-phone"></i>
+          +7 (999) 123-45-67
+        </a>
+      </div>
+
+    </aside>
+  </div>
+</div>
     <script>
-        const galleries = [
-            [
-                "images/project-1-1.jpg",
-                "images/project-1-2.jpg",
-                "images/project-1-3.jpg",
-            ],
-            [
-                "images/project-2-1.jpg",
-                "images/project-2-2.jpg",
-                "images/project-2-3.jpg"
-            ],
-            [
-                "images/project-3-1.jpg",
-                "images/project-3-2.jpg",
-                "images/project-3-3.jpg",
-                "images/project-3-4.jpg"
-            ],
-            [
-                "images/project-4-1.jpg",
-                "images/project-4-2.jpg",
-                "images/project-4-3.jpg"
-            ],
-            [
-                "images/project-5-1.jpg",
-                "images/project-5-2.jpg",
-                "images/project-5-3.jpg",
-                "images/project-5-4.jpg"
-            ],
-            [
-                "images/project-6-1.jpg",
-                "images/project-6-2.jpg",
-                "images/project-6-3.jpg"
-            ]
-        ];
+  /* =========================================================
+     HEADER
+  ========================================================= */
 
-        let currentGallery = 0;
-        let currentImage = 0;
+  const header = document.querySelector(".header");
 
-        const modal = document.getElementById("galleryModal");
-        const modalImage = document.getElementById("modalImage");
-
-        function openGallery(galleryIndex) {
-            currentGallery = galleryIndex;
-            currentImage = 0;
-            modalImage.src = galleries[currentGallery][currentImage];
-            modal.classList.add("active");
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeGallery() {
-            modal.classList.remove("active");
-            document.body.style.overflow = "";
-        }
-
-        function nextImage() {
-            currentImage++;
-
-            if (currentImage >= galleries[currentGallery].length) {
-                currentImage = 0;
-            }
-
-            modalImage.src = galleries[currentGallery][currentImage];
-        }
-
-        function prevImage() {
-            currentImage--;
-
-            if (currentImage < 0) {
-                currentImage = galleries[currentGallery].length - 1;
-            }
-
-            modalImage.src = galleries[currentGallery][currentImage];
-        }
-
-        modal.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                closeGallery();
-            }
-        });
-
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") closeGallery();
-            if (event.key === "ArrowRight") nextImage();
-            if (event.key === "ArrowLeft") prevImage();
-        });
-          const header = document.querySelector(".header");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-  });
-    const revealElements = document.querySelectorAll(".reveal");
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
+  if (header) {
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 20);
     });
-  }, {
-    threshold: 0.15
-  });
-
-  revealElements.forEach((el) => revealObserver.observe(el));
+  }
 
 
-  const projectTitles = [
-    "Дом из газобетона",
-    "Ремонт квартиры",
-    "Фасадные работы",
-    "Коммерческий объект",
-    "Кровельные работы",
-    "Отделка дома"
+  /* =========================================================
+     SCROLL REVEAL
+  ========================================================= */
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("active");
+    });
+  }
+
+
+  /* =========================================================
+     PROJECTS DATA
+  ========================================================= */
+
+  const projectsData = [
+{
+  category: "Квартира",
+  title: "Квартира на Фёдора Полетаева",
+  location: "Москва, ул. Фёдора Полетаева",
+  area: "Уточняется",
+  duration: "В процессе",
+  workType: "Черновые и инженерные работы",
+  description:
+    "Выполнили демонтаж и подготовку помещений, прокладку инженерных коммуникаций, монтаж сантехнических выводов и коллекторного узла, устройство гидроизоляции в санузле, подготовку стен и пола, электромонтажные работы и усиление дверного проёма.",
+
+  media: [
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-1.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-2.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-3.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-4.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-5.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-6.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-7.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-8.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-9.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-10.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-11.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-12.jpg"
+    },
+    {
+      type: "image",
+      src: "images/projects/fedora-poletaeva/photo-13.jpg"
+    },
+    {
+      type: "video",
+      src: "images/projects/fedora-poletaeva/video-1.mp4",
+      poster: "images/projects/fedora-poletaeva/video-cover-1.jpg"
+    },
+    {
+      type: "video",
+      src: "images/projects/fedora-poletaeva/video-2.mp4",
+      poster: "images/projects/fedora-poletaeva/video-cover-2.jpg"
+    }
+  ]
+},
+
+    {
+      category: "Загородный дом",
+      title: "Отделка дома 180 м²",
+      location: "Московская область",
+      area: "180 м²",
+      duration: "4 месяца",
+      workType: "Внутренняя отделка",
+      description:
+        "Выполнили инженерные и отделочные работы в загородном доме, включая электрику, сантехнику и чистовую отделку.",
+
+      media: [
+        {
+          type: "image",
+          src: "images/projects/house-180/photo-1.jpg"
+        },
+        {
+          type: "image",
+          src: "images/projects/house-180/photo-2.jpg"
+        },
+        {
+          type: "video",
+          src: "images/projects/house-180/video-1.mp4",
+          poster: "images/projects/house-180/cover.jpg"
+        }
+      ]
+    },
+
+    {
+      category: "Коммерческое помещение",
+      title: "Ремонт офиса 120 м²",
+      location: "Москва",
+      area: "120 м²",
+      duration: "45 дней",
+      workType: "Коммерческий ремонт",
+      description:
+        "Подготовили помещение, выполнили монтаж электрики, освещения, напольных покрытий и чистовую отделку офиса.",
+
+      media: [
+        {
+          type: "image",
+          src: "images/projects/commercial/photo-1.jpg"
+        },
+        {
+          type: "image",
+          src: "images/projects/commercial/photo-2.jpg"
+        },
+        {
+          type: "video",
+          src: "images/projects/commercial/video-1.mp4",
+          poster: "images/projects/commercial/cover.jpg"
+        }
+      ]
+    }
   ];
 
-  let sliderGallery = 0;
-  let sliderImage = 0;
 
-  const projectSlider = document.getElementById("projectSlider");
-  const projectSliderImage = document.getElementById("projectSliderImage");
-  const projectSliderTitle = document.getElementById("projectSliderTitle");
-  const projectSliderCounter = document.getElementById("projectSliderCounter");
+  /* =========================================================
+     PROJECT MODAL
+  ========================================================= */
 
-  function openProjectSlider(index) {
-    sliderGallery = index;
-    sliderImage = 0;
-    updateProjectSlider();
-    projectSlider.classList.add("active");
+  const projectModal = document.getElementById("projectModal");
+  const projectViewer = document.getElementById("projectViewer");
+  const projectThumbnails = document.getElementById("projectThumbnails");
+
+  const projectCategory = document.getElementById("projectCategory");
+  const projectTitle = document.getElementById("projectTitle");
+  const projectLocation = document.getElementById("projectLocation");
+  const projectArea = document.getElementById("projectArea");
+  const projectDuration = document.getElementById("projectDuration");
+  const projectWorkType = document.getElementById("projectWorkType");
+  const projectDescription = document.getElementById("projectDescription");
+  const projectCounter = document.getElementById("projectCounter");
+
+  let activeProjectIndex = 0;
+  let activeMediaIndex = 0;
+
+  function openProject(projectIndex) {
+    if (!projectModal || !projectsData[projectIndex]) return;
+
+    activeProjectIndex = projectIndex;
+    activeMediaIndex = 0;
+
+    const project = projectsData[activeProjectIndex];
+
+    projectCategory.textContent = project.category;
+    projectTitle.textContent = project.title;
+    projectLocation.textContent = project.location;
+    projectArea.textContent = project.area;
+    projectDuration.textContent = project.duration;
+    projectWorkType.textContent = project.workType;
+    projectDescription.textContent = project.description;
+
+    createProjectThumbnails();
+    renderProjectMedia();
+
+    projectModal.classList.add("active");
+    projectModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
   }
 
-  function closeProjectSlider() {
-    projectSlider.classList.remove("active");
+  function closeProject() {
+    if (!projectModal) return;
+
+    const activeVideo = projectViewer?.querySelector("video");
+
+    if (activeVideo) {
+      activeVideo.pause();
+    }
+
+    projectModal.classList.remove("active");
+    projectModal.setAttribute("aria-hidden", "true");
+
+    if (projectViewer) {
+      projectViewer.innerHTML = "";
+    }
+
     document.body.style.overflow = "";
   }
 
-  function updateProjectSlider() {
-    projectSliderImage.src = galleries[sliderGallery][sliderImage];
-    projectSliderTitle.textContent = projectTitles[sliderGallery];
-    projectSliderCounter.textContent = `${sliderImage + 1} / ${galleries[sliderGallery].length}`;
+  function renderProjectMedia() {
+    if (!projectViewer) return;
+
+    const project = projectsData[activeProjectIndex];
+    const media = project.media[activeMediaIndex];
+
+    projectViewer.innerHTML = "";
+
+    if (media.type === "video") {
+      const video = document.createElement("video");
+
+      video.src = media.src;
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = "metadata";
+
+      if (media.poster) {
+        video.poster = media.poster;
+      }
+
+      projectViewer.appendChild(video);
+    } else {
+      const image = document.createElement("img");
+
+      image.src = media.src;
+      image.alt = project.title;
+      image.loading = "eager";
+
+      projectViewer.appendChild(image);
+    }
+
+    if (projectCounter) {
+      projectCounter.textContent =
+        `${activeMediaIndex + 1} из ${project.media.length}`;
+    }
+
+    updateActiveThumbnail();
   }
 
-  function nextSliderImage() {
-    sliderImage = (sliderImage + 1) % galleries[sliderGallery].length;
-    updateProjectSlider();
+  function createProjectThumbnails() {
+    if (!projectThumbnails) return;
+
+    const project = projectsData[activeProjectIndex];
+
+    projectThumbnails.innerHTML = "";
+
+    project.media.forEach((media, index) => {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "project-thumbnail";
+      button.setAttribute(
+        "aria-label",
+        `Открыть материал ${index + 1}`
+      );
+
+      button.addEventListener("click", () => {
+        activeMediaIndex = index;
+        renderProjectMedia();
+      });
+
+      const image = document.createElement("img");
+
+      image.src =
+        media.type === "video"
+          ? media.poster
+          : media.src;
+
+      image.alt = `Превью материала ${index + 1}`;
+      image.loading = "lazy";
+
+      button.appendChild(image);
+
+      if (media.type === "video") {
+        const icon = document.createElement("span");
+
+        icon.className = "project-thumbnail__video";
+        icon.innerHTML = '<i class="fa-solid fa-play"></i>';
+
+        button.appendChild(icon);
+      }
+
+      projectThumbnails.appendChild(button);
+    });
   }
 
-  function prevSliderImage() {
-    sliderImage =
-      sliderImage - 1 < 0
-        ? galleries[sliderGallery].length - 1
-        : sliderImage - 1;
+  function updateActiveThumbnail() {
+    if (!projectThumbnails) return;
 
-    updateProjectSlider();
+    const thumbnails =
+      projectThumbnails.querySelectorAll(".project-thumbnail");
+
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.classList.toggle(
+        "active",
+        index === activeMediaIndex
+      );
+    });
+
+    thumbnails[activeMediaIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center"
+    });
   }
 
+  function nextProjectMedia() {
+    const media = projectsData[activeProjectIndex]?.media;
 
+    if (!media?.length) return;
+
+    activeMediaIndex =
+      (activeMediaIndex + 1) % media.length;
+
+    renderProjectMedia();
+  }
+
+  function previousProjectMedia() {
+    const media = projectsData[activeProjectIndex]?.media;
+
+    if (!media?.length) return;
+
+    activeMediaIndex =
+      activeMediaIndex === 0
+        ? media.length - 1
+        : activeMediaIndex - 1;
+
+    renderProjectMedia();
+  }
+
+  if (projectModal) {
+    projectModal.addEventListener("click", (event) => {
+      if (event.target === projectModal) {
+        closeProject();
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (!projectModal?.classList.contains("active")) return;
+
+    if (event.key === "Escape") {
+      closeProject();
+    }
+
+    if (event.key === "ArrowRight") {
+      nextProjectMedia();
+    }
+
+    if (event.key === "ArrowLeft") {
+      previousProjectMedia();
+    }
+  });
+
+
+  /* =========================================================
+     PROJECT FILTERS
+  ========================================================= */
+
+  const filterButtons =
+    document.querySelectorAll(".works-filter");
+
+  const projectCards =
+    document.querySelectorAll(".project-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+
+      filterButtons.forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      projectCards.forEach((card) => {
+        const category = card.dataset.category;
+
+        card.classList.toggle(
+          "hidden",
+          filter !== "all" && category !== filter
+        );
+      });
+    });
+  });
+
+
+  /* =========================================================
+     BEFORE / AFTER
+  ========================================================= */
 
   const baRange = document.querySelector(".ba-range");
   const baAfter = document.querySelector(".ba-img--after");
   const baLine = document.querySelector(".ba-line");
 
-  if (baRange) {
-    baRange.addEventListener("input", () => {
-      const value = baRange.value;
-      baAfter.style.clipPath = `inset(0 0 0 ${value}%)`;
-      baLine.style.left = `${value}%`;
-    });
+  function updateBeforeAfter() {
+    if (!baRange || !baAfter || !baLine) return;
+
+    const value = Number(baRange.value);
+
+    baAfter.style.clipPath =
+      `inset(0 0 0 ${value}%)`;
+
+    baLine.style.left = `${value}%`;
   }
 
+  if (baRange) {
+    baRange.addEventListener("input", updateBeforeAfter);
+    updateBeforeAfter();
+  }
+
+
+  /* =========================================================
+     CALCULATOR
+  ========================================================= */
 
   const workType = document.getElementById("workType");
   const areaInput = document.getElementById("areaInput");
@@ -546,13 +990,23 @@
   const calcResult = document.getElementById("calcResult");
 
   function calculatePrice() {
+    if (
+      !workType ||
+      !areaInput ||
+      !complexity ||
+      !calcResult
+    ) {
+      return;
+    }
+
     const price = Number(workType.value);
-    const area = Number(areaInput.value);
+    const area = Math.max(Number(areaInput.value) || 0, 0);
     const multiplier = Number(complexity.value);
 
-    const result = price * area * multiplier;
+    const result = Math.round(price * area * multiplier);
 
-    calcResult.textContent = result.toLocaleString("ru-RU") + " ₽";
+    calcResult.textContent =
+      result.toLocaleString("ru-RU") + " ₽";
   }
 
   if (workType && areaInput && complexity) {
