@@ -34,7 +34,7 @@
     <div class="header__actions">
       <span class="header__badge">Замер бесплатно</span>
     <a href="tel:+7936" class="header-phone">
-  +7 (999) 123-45-67
+  +7 (936) 262-22-72
 </a>
     </div>
 
@@ -566,9 +566,9 @@
           Получить смету
         </a>
 
-        <a href="tel:+79991234567" class="project-modal__phone">
+        <a href="tel:+79362622272" class="project-modal__phone">
           <i class="fa-solid fa-phone"></i>
-          +7 (999) 123-45-67
+          +7 (936) 262-22-72
         </a>
       </div>
 
@@ -688,12 +688,12 @@
     {
       type: "video",
       src: "images/projects/fedora-poletaeva/video-1.MP4",
-      poster: "images/projects/fedora-poletaeva/video-cover-1.jpg"
+      // poster: "images/projects/fedora-poletaeva/video-cover-1.jpg"
     },
     {
       type: "video",
       src: "images/projects/fedora-poletaeva/video-2.MP4",
-      poster: "images/projects/fedora-poletaeva/video-cover-2.jpg"
+      // poster: "images/projects/fedora-poletaeva/video-cover-2.jpg"
     }
   ]
 },
@@ -1097,54 +1097,85 @@
     document.body.style.overflow = "";
   }
 
-  function renderProjectMedia() {
-    if (!projectViewer) return;
+ function renderProjectMedia() {
+  if (!projectViewer) return;
 
-    const project = projectsData[activeProjectIndex];
-    const media = project.media[activeMediaIndex];
+  const project = projectsData[activeProjectIndex];
+  const media = project.media[activeMediaIndex];
 
-    projectViewer.innerHTML = "";
+  projectViewer.innerHTML = "";
 
   if (media.type === "video") {
-  const video = document.createElement("video");
+    const videoWrapper = document.createElement("div");
+    videoWrapper.className = "project-video";
 
-  video.src = media.src;
-  video.controls = true;
-  video.playsInline = true;
-  video.preload = "metadata";
+    const video = document.createElement("video");
 
-  video.muted = true;
-  video.defaultMuted = true;
-  video.volume = 0;
-
-  if (media.poster) {
-    video.poster = media.poster;
-  }
-
-  video.addEventListener("volumechange", () => {
+    video.src = media.src;
+    video.playsInline = true;
+    video.preload = "metadata";
     video.muted = true;
+    video.defaultMuted = true;
     video.volume = 0;
-  });
+    video.controlsList = "nodownload";
 
-  projectViewer.appendChild(video);
-} else {
-      const image = document.createElement("img");
-
-      image.src = media.src;
-      image.alt = project.title;
-      image.loading = "eager";
-
-      projectViewer.appendChild(image);
+    if (media.poster) {
+      video.poster = media.poster;
     }
 
-    if (projectCounter) {
-      projectCounter.textContent =
-        `${activeMediaIndex + 1} из ${project.media.length}`;
-    }
+    const playButton = document.createElement("button");
+    playButton.type = "button";
+    playButton.className = "project-video-play";
+    playButton.setAttribute("aria-label", "Воспроизвести видео");
 
-    updateActiveThumbnail();
+    playButton.innerHTML = `
+      <span class="project-video-play__icon">
+        <i class="fa-solid fa-play"></i>
+      </span>
+
+      <span class="project-video-play__text">
+        Смотреть видео
+      </span>
+    `;
+
+    playButton.addEventListener("click", async () => {
+      playButton.classList.add("is-hidden");
+      video.controls = true;
+
+      try {
+        await video.play();
+      } catch (error) {
+        console.error("Не удалось запустить видео:", error);
+        playButton.classList.remove("is-hidden");
+      }
+    });
+
+    video.addEventListener("ended", () => {
+      video.controls = false;
+      video.currentTime = 0;
+      playButton.classList.remove("is-hidden");
+    });
+
+    videoWrapper.appendChild(video);
+    videoWrapper.appendChild(playButton);
+    projectViewer.appendChild(videoWrapper);
+  } else {
+    const image = document.createElement("img");
+
+    image.src = media.src;
+    image.alt = project.title;
+    image.loading = "eager";
+
+    projectViewer.appendChild(image);
   }
 
+  if (projectCounter) {
+    projectCounter.textContent =
+      `${activeMediaIndex + 1} из ${project.media.length}`;
+  }
+
+  updateActiveThumbnail();
+}
   function createProjectThumbnails() {
     if (!projectThumbnails) return;
 
@@ -1167,26 +1198,43 @@
         renderProjectMedia();
       });
 
-      const image = document.createElement("img");
+const image = document.createElement("img");
 
-      image.src =
-        media.type === "video"
-          ? media.poster
-          : media.src;
+const fallbackPoster = project.media.find(
+  (item) => item.type === "image"
+)?.src;
 
-      image.alt = `Превью материала ${index + 1}`;
-      image.loading = "lazy";
+image.src =
+  media.type === "video"
+    ? media.poster || fallbackPoster || ""
+    : media.src;
 
-      button.appendChild(image);
+image.alt =
+  media.type === "video"
+    ? `Превью видео ${index + 1}`
+    : `Превью фотографии ${index + 1}`;
 
-      if (media.type === "video") {
-        const icon = document.createElement("span");
+image.loading = "lazy";
+image.decoding = "async";
 
-        icon.className = "project-thumbnail__video";
-        icon.innerHTML = '<i class="fa-solid fa-play"></i>';
+image.addEventListener("error", () => {
+  image.remove();
 
-        button.appendChild(icon);
-      }
+  button.classList.add("project-thumbnail--fallback");
+});
+
+button.appendChild(image);
+
+  if (media.type === "video") {
+  const icon = document.createElement("span");
+
+  icon.className = "project-thumbnail__video";
+  icon.innerHTML = `
+    <i class="fa-solid fa-play"></i>
+  `;
+
+  button.appendChild(icon);
+}
 
       projectThumbnails.appendChild(button);
     });
