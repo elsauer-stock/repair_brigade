@@ -413,13 +413,6 @@
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
    <section class="contacts reveal" id="contacts">
         <div class="container contacts__wrap">
 
@@ -553,17 +546,6 @@
           <span>Местоположение</span>
           <strong id="projectLocation"></strong>
         </div>
-
-        <div>
-          <span>Площадь</span>
-          <strong id="projectArea"></strong>
-        </div>
-
-        <div>
-          <span>Срок выполнения</span>
-          <strong id="projectDuration"></strong>
-        </div>
-
         <div>
           <span>Тип работ</span>
           <strong id="projectWorkType"></strong>
@@ -702,10 +684,7 @@
       type: "image",
       src: "images/projects/fedora-poletaeva/photo-12.JPG"
     },
-    {
-      type: "image",
-      src: "images/projects/fedora-poletaeva/photo-13.JPG"
-    },
+
     {
       type: "video",
       src: "images/projects/fedora-poletaeva/video-1.MP4",
@@ -1068,8 +1047,7 @@
   const projectCategory = document.getElementById("projectCategory");
   const projectTitle = document.getElementById("projectTitle");
   const projectLocation = document.getElementById("projectLocation");
-  const projectArea = document.getElementById("projectArea");
-  const projectDuration = document.getElementById("projectDuration");
+
   const projectWorkType = document.getElementById("projectWorkType");
   const projectDescription = document.getElementById("projectDescription");
   const projectCounter = document.getElementById("projectCounter");
@@ -1088,8 +1066,7 @@
     projectCategory.textContent = project.category;
     projectTitle.textContent = project.title;
     projectLocation.textContent = project.location;
-    projectArea.textContent = project.area;
-    projectDuration.textContent = project.duration;
+   
     projectWorkType.textContent = project.workType;
     projectDescription.textContent = project.description;
 
