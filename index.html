@@ -443,6 +443,50 @@
     </div>
   </div>
 </article>
+<article
+  class="project-card"
+  data-category="apartment"
+  onclick="openProject(6)"
+>
+  <div class="project-card__image">
+    <img
+      src="images/projects/zvenigorod/photo (1).webp"
+      alt="Ремонт квартиры в Звенигороде"
+      loading="lazy"
+      decoding="async"
+      width="640"
+      height="480"
+    >
+
+    <div class="project-card__gradient"></div>
+
+    <div class="project-card__badges">
+      <span>
+        <i class="fa-solid fa-camera"></i>
+        28 фото
+      </span>
+    </div>
+
+    <div class="project-card__overlay">
+      <span>Смотреть объект</span>
+    </div>
+  </div>
+
+  <div class="project-card__content">
+    <p class="project-card__category">
+      Квартира
+    </p>
+
+    <h3>Квартира в Звенигороде</h3>
+
+    <div class="project-card__meta">
+      <span>
+        <i class="fa-solid fa-location-dot"></i>
+        Звенигород
+      </span>
+    </div>
+  </div>
+</article>
 
     </div>
   </div>
@@ -1194,6 +1238,22 @@
     ...Array.from({ length: 3 }, (_, index) => ({
       type: "video",
       src: `images/projects/peredelka-pomeshcheniya/video (${index + 1}).mp4`
+    }))
+  ]
+},
+{
+  category: "Квартира",
+  title: "Квартира в Звенигороде",
+  location: "Московская область, Звенигород",
+  workType: "Комплексный ремонт квартиры",
+
+  description:
+    "Выполняем комплексный ремонт квартиры в Звенигороде: демонтаж и подготовку помещений, прокладку инженерных коммуникаций, электромонтажные и сантехнические работы, выравнивание поверхностей и последующую чистовую отделку.",
+
+  media: [
+    ...Array.from({ length: 28 }, (_, index) => ({
+      type: "image",
+      src: `images/projects/zvenigorod/photo (${index + 1}).webp`
     }))
   ]
 }
