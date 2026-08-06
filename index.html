@@ -1166,6 +1166,7 @@
   let activeProjectIndex = 0;
   let activeMediaIndex = 0;
   let thumbnailsIdleTask = null;
+  let mobileFullscreenVideo = null;
 
   function getActiveProject() {
     return projectsData[activeProjectIndex] || null;
@@ -1173,6 +1174,90 @@
 
   function getActiveMedia() {
     return getActiveProject()?.media?.[activeMediaIndex] || null;
+  }
+
+  function isMobileVideoDevice() {
+    return (
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+      window.matchMedia("(pointer: coarse)").matches
+    );
+  }
+
+  function getMobileFullscreenVideo() {
+    if (mobileFullscreenVideo) return mobileFullscreenVideo;
+
+    const video = document.createElement("video");
+
+    video.className = "mobile-fullscreen-video";
+    video.controls = true;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.preload = "none";
+    video.playsInline = false;
+
+    video.removeAttribute("playsinline");
+    video.removeAttribute("webkit-playsinline");
+    video.setAttribute("controlslist", "nodownload");
+    video.setAttribute("disablepictureinpicture", "");
+
+    Object.assign(video.style, {
+      position: "fixed",
+      inset: "0",
+      width: "1px",
+      height: "1px",
+      opacity: "0",
+      pointerEvents: "none",
+      zIndex: "-1"
+    });
+
+    const resetVideo = () => {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    };
+
+    video.addEventListener("ended", resetVideo);
+    video.addEventListener("webkitendfullscreen", resetVideo);
+
+    document.body.appendChild(video);
+    mobileFullscreenVideo = video;
+
+    return video;
+  }
+
+  function playMobileFullscreenVideo(media) {
+    if (!media?.src) return;
+
+    const video = getMobileFullscreenVideo();
+
+    video.pause();
+    video.src = media.src;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.controls = true;
+    video.playsInline = false;
+    video.removeAttribute("playsinline");
+    video.removeAttribute("webkit-playsinline");
+
+    const playPromise = video.play();
+
+    try {
+      if (typeof video.webkitEnterFullscreen === "function") {
+        video.webkitEnterFullscreen();
+      } else if (video.requestFullscreen) {
+        video.requestFullscreen().catch(() => {});
+      }
+    } catch (error) {
+      console.warn("Не удалось открыть полноэкранный режим:", error);
+    }
+
+    if (playPromise?.catch) {
+      playPromise.catch((error) => {
+        console.error("Не удалось запустить мобильное видео:", error);
+      });
+    }
   }
 
   function stopAndReleaseCurrentVideo() {
@@ -1256,7 +1341,7 @@
     document.body.style.overflow = "";
   }
 
-  function renderProjectMedia(options = {}) {
+  function renderProjectMedia() {
     if (!projectViewer) return;
 
     const project = getActiveProject();
@@ -1268,13 +1353,14 @@
     projectViewer.innerHTML = "";
 
     if (media.type === "video") {
-      renderProjectVideo(media, project, options);
+      renderProjectVideo(media, project);
     } else {
       renderProjectImage(media, project);
     }
 
     if (projectCounter) {
-      projectCounter.textContent = `${activeMediaIndex + 1} из ${project.media.length}`;
+      projectCounter.textContent =
+        `${activeMediaIndex + 1} из ${project.media.length}`;
     }
 
     updateActiveThumbnail();
@@ -1290,23 +1376,28 @@
     image.decoding = "async";
     image.fetchPriority = "high";
 
-    image.addEventListener("error", () => {
-      projectViewer.innerHTML = `
-        <div class="project-media-error" role="status">
-          <i class="fa-regular fa-image" aria-hidden="true"></i>
-          <span>Не удалось загрузить фотографию</span>
-        </div>
-      `;
-    }, { once: true });
+    image.addEventListener(
+      "error",
+      () => {
+        projectViewer.innerHTML = `
+          <div class="project-media-error" role="status">
+            <i class="fa-regular fa-image" aria-hidden="true"></i>
+            <span>Не удалось загрузить фотографию</span>
+          </div>
+        `;
+      },
+      { once: true }
+    );
 
     projectViewer.appendChild(image);
   }
 
-  function renderProjectVideo(media, project, options = {}) {
+  function renderProjectVideo(media, project) {
     const videoWrapper = document.createElement("div");
     videoWrapper.className = "project-video project-video--placeholder";
 
     const video = document.createElement("video");
+
     video.playsInline = true;
     video.preload = "none";
     video.muted = true;
@@ -1318,6 +1409,7 @@
     video.setAttribute("aria-label", project.title || "Видео проекта");
 
     const playButton = document.createElement("button");
+
     playButton.type = "button";
     playButton.className = "project-video-play";
     playButton.setAttribute("aria-label", "Воспроизвести видео");
@@ -1329,16 +1421,13 @@
       <span class="project-video-play__hint">Видео объекта</span>
     `;
 
-    const isMobileViewport = () =>
-      window.matchMedia("(max-width: 768px)").matches;
-
     const restoreVideoPlaceholder = () => {
       video.controls = false;
       videoWrapper.classList.remove("is-playing");
       playButton.classList.remove("is-hidden");
     };
 
-    const startVideo = async ({ fullscreen = false } = {}) => {
+    const startInlineVideo = async () => {
       if (!video.getAttribute("src")) {
         video.src = media.src;
         video.load();
@@ -1349,24 +1438,6 @@
       playButton.classList.add("is-hidden");
 
       try {
-        /*
-         * На iPhone системный полноэкранный режим нужно вызвать прямо
-         * внутри пользовательского клика, без setTimeout.
-         */
-        if (
-          fullscreen &&
-          isMobileViewport() &&
-          typeof video.webkitEnterFullscreen === "function"
-        ) {
-          video.webkitEnterFullscreen();
-        } else if (
-          fullscreen &&
-          isMobileViewport() &&
-          video.requestFullscreen
-        ) {
-          await video.requestFullscreen();
-        }
-
         await video.play();
       } catch (error) {
         console.error("Не удалось запустить видео:", error);
@@ -1376,9 +1447,12 @@
     };
 
     playButton.addEventListener("click", () => {
-      startVideo({
-        fullscreen: isMobileViewport()
-      });
+      if (isMobileVideoDevice()) {
+        playMobileFullscreenVideo(media);
+        return;
+      }
+
+      startInlineVideo();
     });
 
     video.addEventListener("volumechange", () => {
@@ -1391,11 +1465,6 @@
     video.addEventListener("ended", () => {
       video.pause();
       video.currentTime = 0;
-      restoreVideoPlaceholder();
-    });
-
-    video.addEventListener("webkitendfullscreen", () => {
-      video.pause();
       restoreVideoPlaceholder();
     });
 
@@ -1412,14 +1481,6 @@
     videoWrapper.appendChild(video);
     videoWrapper.appendChild(playButton);
     projectViewer.appendChild(videoWrapper);
-
-    /*
-     * При нажатии на видеоминиатюру на телефоне запускаем уже созданный
-     * плеер сразу в полноэкранном режиме. Дополнительный <video> не создаётся.
-     */
-    if (options.mobileFullscreen && isMobileViewport()) {
-      startVideo({ fullscreen: true });
-    }
   }
 
   function createProjectThumbnails() {
@@ -1435,6 +1496,7 @@
 
     project.media.forEach((media, index) => {
       const button = document.createElement("button");
+
       button.type = "button";
       button.className = "project-thumbnail";
       button.setAttribute(
@@ -1445,21 +1507,21 @@
       );
 
       button.addEventListener("click", () => {
-        const isSameMedia = activeMediaIndex === index;
-        const isMobileVideo =
-          media.type === "video" &&
-          window.matchMedia("(max-width: 768px)").matches;
-
-        /*
-         * На телефоне повторный клик по уже выбранному видео тоже должен
-         * открывать системный полноэкранный плеер.
-         */
-        if (isSameMedia && !isMobileVideo) return;
-
         activeMediaIndex = index;
-        renderProjectMedia({
-          mobileFullscreen: isMobileVideo
-        });
+
+        if (media.type === "video" && isMobileVideoDevice()) {
+          updateActiveThumbnail();
+
+          if (projectCounter) {
+            projectCounter.textContent =
+              `${activeMediaIndex + 1} из ${project.media.length}`;
+          }
+
+          playMobileFullscreenVideo(media);
+          return;
+        }
+
+        renderProjectMedia();
       });
 
       if (media.type === "video") {
@@ -1474,21 +1536,26 @@
         `;
       } else {
         const image = document.createElement("img");
+
         image.src = media.thumbnail || media.src;
         image.alt = `Превью фотографии ${index + 1}`;
         image.loading = "lazy";
         image.decoding = "async";
         image.fetchPriority = "low";
 
-        image.addEventListener("error", () => {
-          image.remove();
-          button.classList.add("project-thumbnail--image-fallback");
-          button.innerHTML = `
-            <span class="project-thumbnail__image-placeholder" aria-hidden="true">
-              <i class="fa-regular fa-image"></i>
-            </span>
-          `;
-        }, { once: true });
+        image.addEventListener(
+          "error",
+          () => {
+            image.remove();
+            button.classList.add("project-thumbnail--image-fallback");
+            button.innerHTML = `
+              <span class="project-thumbnail__image-placeholder" aria-hidden="true">
+                <i class="fa-regular fa-image"></i>
+              </span>
+            `;
+          },
+          { once: true }
+        );
 
         button.appendChild(image);
       }
@@ -1503,10 +1570,12 @@
   function updateActiveThumbnail() {
     if (!projectThumbnails) return;
 
-    const thumbnails = projectThumbnails.querySelectorAll(".project-thumbnail");
+    const thumbnails =
+      projectThumbnails.querySelectorAll(".project-thumbnail");
 
     thumbnails.forEach((thumbnail, index) => {
       const isActive = index === activeMediaIndex;
+
       thumbnail.classList.toggle("active", isActive);
       thumbnail.setAttribute("aria-current", isActive ? "true" : "false");
     });
@@ -1526,11 +1595,13 @@
     [activeMediaIndex - 1, activeMediaIndex + 1].forEach((index) => {
       const normalizedIndex =
         (index + project.media.length) % project.media.length;
+
       const media = project.media[normalizedIndex];
 
       if (!media || media.type !== "image") return;
 
       const preloadImage = new Image();
+
       preloadImage.decoding = "async";
       preloadImage.src = media.src;
     });
@@ -1541,7 +1612,9 @@
 
     if (!media?.length) return;
 
-    activeMediaIndex = (activeMediaIndex + 1) % media.length;
+    activeMediaIndex =
+      (activeMediaIndex + 1) % media.length;
+
     renderProjectMedia();
   }
 
@@ -1575,7 +1648,6 @@
       previousProjectMedia();
     }
   });
-
 
   /* =========================================================
      PROJECT FILTERS
