@@ -511,11 +511,16 @@
     <div class="project-card__gradient"></div>
 
     <div class="project-card__badges">
-      <span>
-        <i class="fa-solid fa-camera"></i>
-        12 фото
-      </span>
-    </div>
+  <span>
+    <i class="fa-solid fa-camera"></i>
+    23 фото
+  </span>
+
+  <span>
+    <i class="fa-solid fa-play"></i>
+    1 видео
+  </span>
+</div>
 
     <div class="project-card__overlay">
       <span>Смотреть объект</span>
@@ -1352,10 +1357,15 @@
     "Выполняем комплексный ремонт квартиры в Бескудниково: демонтаж и подготовку помещений, инженерные коммуникации, сантехнические и электромонтажные работы, выравнивание поверхностей и последующую отделку.",
 
   media: [
-    ...Array.from({ length: 12 }, (_, index) => ({
+    ...Array.from({ length: 23 }, (_, index) => ({
       type: "image",
       src: `images/projects/bezkudnikovo/foto (${index + 1}).webp`
-    }))
+    })),
+
+    {
+      type: "video",
+      src: "images/projects/bezkudnikovo/video.mp4"
+    }
   ]
 }
   ];
