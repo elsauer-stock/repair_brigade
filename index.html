@@ -542,7 +542,55 @@
         Москва
       </span>
     </div>
+    
 
+  </div>
+</article>
+<article
+  class="project-card"
+  data-category="apartments"
+  onclick="openProject(8)"
+>
+  <div class="project-card__image">
+    <img
+      src="images/projects/avangardnaya/photo-1.webp"
+      alt="Ремонт квартиры на Авангардной улице"
+      loading="lazy"
+      decoding="async"
+      width="640"
+      height="480"
+    >
+
+    <div class="project-card__gradient"></div>
+
+    <div class="project-card__badges">
+      <span>
+        <i class="fa-solid fa-camera"></i>
+        5 фото
+      </span>
+
+      <span>
+        <i class="fa-solid fa-play"></i>
+        3 видео
+      </span>
+    </div>
+
+    <div class="project-card__overlay">
+      <span>Смотреть объект</span>
+    </div>
+  </div>
+
+  <div class="project-card__content">
+    <p class="project-card__category">Квартира</p>
+
+    <h3>Квартира на Авангардной</h3>
+
+    <div class="project-card__meta">
+      <span>
+        <i class="fa-solid fa-location-dot"></i>
+        Москва
+      </span>
+    </div>
   </div>
 </article>
 
@@ -1378,6 +1426,27 @@
   ]
   
 },
+{
+  category: "Квартира",
+  title: "Квартира на Авангардной",
+  location: "Москва, Авангардная улица",
+  workType: "Комплексный ремонт квартиры",
+
+  description:
+    "Ремонт квартиры на Авангардной улице: подготовительные и демонтажные работы, монтаж инженерных коммуникаций, электромонтажные и сантехнические работы, выравнивание поверхностей и отделка помещений.",
+
+  media: [
+    ...Array.from({ length: 5 }, (_, index) => ({
+      type: "image",
+      src: `images/projects/avangardnaya/foto (${index + 1}).webp`
+    })),
+
+    ...Array.from({ length: 3 }, (_, index) => ({
+      type: "video",
+      src: `images/projects/avangardnaya/video (${index + 1}).mp4`
+    }))
+  ]
+}
 
   ];
 
