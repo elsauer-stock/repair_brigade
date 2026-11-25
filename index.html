@@ -563,18 +563,17 @@
 
     <div class="project-card__gradient"></div>
 
-    <div class="project-card__badges">
-      <span>
-        <i class="fa-solid fa-camera"></i>
-        5 фото
-      </span>
+<div class="project-card__badges">
+  <span>
+    <i class="fa-solid fa-camera"></i>
+    8 фото
+  </span>
 
-      <span>
-        <i class="fa-solid fa-play"></i>
-        4 видео
-      </span>
-    </div>
-
+  <span>
+    <i class="fa-solid fa-play"></i>
+    4 видео
+  </span>
+</div>
     <div class="project-card__overlay">
       <span>Смотреть объект</span>
     </div>
@@ -1404,8 +1403,8 @@
   description:
     "Выполняем комплексный ремонт квартиры в Бескудниково: демонтаж и подготовку помещений, инженерные коммуникации, сантехнические и электромонтажные работы, выравнивание поверхностей и последующую отделку.",
 
-  media: [
-    ...Array.from({ length: 57 }, (_, index) => ({
+ media: [
+    ...Array.from({ length: 59 }, (_, index) => ({
       type: "image",
       src: `images/projects/bezkudnikovo/foto (${index + 1}).webp`
     })),
@@ -1414,15 +1413,11 @@
       type: "video",
       src: "images/projects/bezkudnikovo/video.mp4"
     },
-     {
+
+    ...Array.from({ length: 3 }, (_, index) => ({
       type: "video",
-      src: "images/projects/bezkudnikovo/video (1).mp4"
-    },
-     {
-      type: "video",
-      src: "images/projects/bezkudnikovo/video (2).mp4"
-    },
-    
+      src: `images/projects/bezkudnikovo/video (${index + 1}).mp4`
+    }))
   ]
   
 },
@@ -1433,10 +1428,10 @@
   workType: "Комплексный ремонт квартиры",
 
   description:
-    "Ремонт квартиры на Водном стадион: подготовительные и демонтажные работы, монтаж инженерных коммуникаций, электромонтажные и сантехнические работы, выравнивание поверхностей и отделка помещений.",
+    "Ремонт квартиры на Водном стадионе: подготовительные и демонтажные работы, монтаж инженерных коммуникаций, электромонтажные и сантехнические работы, выравнивание поверхностей и отделка помещений.",
 
   media: [
-    ...Array.from({ length: 5 }, (_, index) => ({
+    ...Array.from({ length: 8 }, (_, index) => ({
       type: "image",
       src: `images/projects/avangardnaya/foto (${index + 1}).webp`
     })),
@@ -1447,7 +1442,6 @@
     }))
   ]
 }
-
   ];
 
 
